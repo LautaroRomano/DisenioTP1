@@ -6,6 +6,7 @@
 package views;
 
 import controllers.LoginController;
+import models.User;
 
 /**
  *
@@ -14,11 +15,24 @@ import controllers.LoginController;
 public class Login extends javax.swing.JFrame {
     
     LoginController loginController = new LoginController();
+    User userAutenticate = null;
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+    }
+    
+    public Boolean isAuthenticated(){
+        return userAutenticate != null;
+    }
+    
+    public void setUserAuthenticated(User userAutenticate){
+        this.userAutenticate = userAutenticate;
+    }
+    
+    public User getUserAuthenticated(){
+        return this.userAutenticate;
     }
 
     /**
@@ -96,7 +110,9 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String eml = email.getText();
         String pss = password.getText();
-        if(loginController.validate(eml,pss)){
+        User user = loginController.validate(eml,pss);
+        if(user != null){
+            this.setUserAuthenticated(user);
             dispose();
         }
         

@@ -2,7 +2,6 @@ package controllers;
 
 import javax.swing.JOptionPane;
 import models.User;
-import views.SystemMain;
 
 public class LoginController {
     
@@ -13,16 +12,14 @@ public class LoginController {
         new User("9101","usuario2","apellido2","usuario2@gmail.com","normal","abcd")
     };
     
-    public Boolean validate(String correo, String pass) {
+    public User validate(String correo, String pass) {
         for (User user : users) {
             if (correo.equals(user.getCorreoElectronico()) && pass.equals(user.getContrasenia())) {
-                SystemMain sis = new SystemMain();
-                sis.setVisible(true);
-                return true;
+                return user;
             }
         }
         JOptionPane.showMessageDialog(null, "Correo o Contraseña incorrecta _ Ingrese nuevamente");
-        return false;
+        return null;
     }
     
 }
