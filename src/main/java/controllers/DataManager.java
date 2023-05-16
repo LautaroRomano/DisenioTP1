@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import models.ColorModel;
+import models.ModelsModel;
 import models.UserModel;
 
 /**
@@ -21,9 +22,11 @@ public class DataManager {
     private static DataManager instance = null;
     private List<ColorModel> colors;
     private List<UserModel> users;
+    private List<ModelsModel> models;
 
     private DataManager() {
         colors = new ArrayList<>();
+        models = new ArrayList<>();
         users = Arrays.asList(new UserModel("1234", "usuario0", "usuario0", "admin", "admin", "admin"),
                 new UserModel("5678", "usuario1", "apellido1", "usuario1@gmail.com", "normal", "1234"),
                 new UserModel("9101", "usuario2", "apellido2", "usuario2@gmail.com", "normal", "abcd")
@@ -65,5 +68,17 @@ public class DataManager {
 
     public List<UserModel> getUsers() {
         return users;
+    }
+    
+    public void addModel(ModelsModel model) {
+        models.add(model);
+    }
+
+    public void removeModel(ModelsModel model) {
+        models.remove(model);
+    }
+
+    public List<ModelsModel> getModels() {
+        return models;
     }
 }
