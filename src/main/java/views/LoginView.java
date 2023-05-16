@@ -6,33 +6,22 @@
 package views;
 
 import controllers.LoginController;
-import models.User;
+import controllers.SystemMainController;
+import models.UserModel;
 
 /**
  *
  * @author Lau
  */
-public class Login extends javax.swing.JFrame {
-    
+public class LoginView extends javax.swing.JFrame {
+
     LoginController loginController = new LoginController();
-    User userAutenticate = null;
+
     /**
      * Creates new form Login
      */
-    public Login() {
+    public LoginView() {
         initComponents();
-    }
-    
-    public Boolean isAuthenticated(){
-        return userAutenticate != null;
-    }
-    
-    public void setUserAuthenticated(User userAutenticate){
-        this.userAutenticate = userAutenticate;
-    }
-    
-    public User getUserAuthenticated(){
-        return this.userAutenticate;
     }
 
     /**
@@ -75,12 +64,12 @@ public class Login extends javax.swing.JFrame {
 
         password.setBackground(new java.awt.Color(218, 232, 252));
         jPanel1.add(password);
-        password.setBounds(60, 180, 266, 22);
+        password.setBounds(60, 180, 266, 26);
 
         email.setBackground(new java.awt.Color(218, 232, 252));
         email.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(email);
-        email.setBounds(60, 100, 266, 22);
+        email.setBounds(60, 100, 266, 26);
 
         jButton1.setBackground(new java.awt.Color(16, 128, 190));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,7 +80,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(259, 240, 90, 25);
+        jButton1.setBounds(259, 240, 90, 29);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,18 +99,18 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String eml = email.getText();
         String pss = password.getText();
-        User user = loginController.validate(eml,pss);
-        if(user != null){
-            this.setUserAuthenticated(user);
+        UserModel user = loginController.validate(eml, pss);
+        if (user != null) {
+            SystemMainController sis = new SystemMainController();
+            sis.viewSystemMain();
             dispose();
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField email;

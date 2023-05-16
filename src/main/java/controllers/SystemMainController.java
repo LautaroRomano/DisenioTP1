@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import views.SystemMain;
+import views.SystemMainView;
 
 /**
  *
@@ -13,7 +13,7 @@ import views.SystemMain;
  */
 public class SystemMainController {
     public void viewSystemMain(){
-        SystemMain view = new SystemMain();
+        SystemMainView view = new SystemMainView();
         view.setVisible(true);
     }
 }

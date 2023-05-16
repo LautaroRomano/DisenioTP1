@@ -1,6 +1,6 @@
 package models;
 
-public class User {
+public class UserModel {
     private String dni;
     private String apellidos;
     private String nombres;
@@ -8,7 +8,7 @@ public class User {
     private String tipoUsuario;
     private String contrasenia;
     
-    public User(String dni, String apellidos, String nombres, String correoElectronico, String tipoUsuario, String contrasenia) {
+    public UserModel(String dni, String apellidos, String nombres, String correoElectronico, String tipoUsuario, String contrasenia) {
         this.dni = dni;
         this.apellidos = apellidos;
         this.nombres = nombres;
