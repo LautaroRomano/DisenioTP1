@@ -5,6 +5,7 @@
  */
 package views;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,8 +16,6 @@ import models.ColorModel;
  * @author Lau
  */
 public class SystemMainView extends javax.swing.JFrame {
-
-    
 
     public SystemMainView() {
         initComponents();
@@ -34,6 +33,11 @@ public class SystemMainView extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -140,6 +144,17 @@ public class SystemMainView extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_3) {
+            ManageModelsView manageModelsView = new ManageModelsView();
+            manageModelsView.setVisible(true);
+        }
+        if (evt.getKeyCode() == KeyEvent.VK_4) {
+            ManageColorsView manageColorView = new ManageColorsView();
+            manageColorView.setVisible(true);
+        }
+    }//GEN-LAST:event_formKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

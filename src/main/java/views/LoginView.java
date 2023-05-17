@@ -7,6 +7,7 @@ package views;
 
 import controllers.LoginController;
 import controllers.SystemMainController;
+import java.awt.event.KeyEvent;
 import models.UserModel;
 
 /**
@@ -63,11 +64,21 @@ public class LoginView extends javax.swing.JFrame {
         jLabel3.setBounds(60, 160, 65, 16);
 
         password.setBackground(new java.awt.Color(218, 232, 252));
+        password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordKeyPressed(evt);
+            }
+        });
         jPanel1.add(password);
         password.setBounds(60, 180, 266, 26);
 
         email.setBackground(new java.awt.Color(218, 232, 252));
         email.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                emailKeyPressed(evt);
+            }
+        });
         jPanel1.add(email);
         email.setBounds(60, 100, 266, 26);
 
@@ -97,6 +108,22 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        login();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_emailKeyPressed
+
+    private void passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            login();
+        }
+    }//GEN-LAST:event_passwordKeyPressed
+
+    private void login() {
         String eml = email.getText();
         String pss = password.getText();
         UserModel user = loginController.validate(eml, pss);
@@ -105,12 +132,7 @@ public class LoginView extends javax.swing.JFrame {
             sis.viewSystemMain();
             dispose();
         }
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField email;

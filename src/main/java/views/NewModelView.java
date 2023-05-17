@@ -6,9 +6,12 @@
 package views;
 
 import controllers.DataManager;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import models.ColorModel;
+import models.ModelsModel;
 
 /**
  *
@@ -18,7 +21,7 @@ public class NewModelView extends javax.swing.JFrame {
 
     DataManager dataManager = DataManager.getInstance();
     private MyFunctionCargarTabla cargarTabla;
-    
+
     public NewModelView(MyFunctionCargarTabla cargarTabla) {
         initComponents();
         this.cargarTabla = cargarTabla;
@@ -30,9 +33,9 @@ public class NewModelView extends javax.swing.JFrame {
             colorsList.addItem(myColor.getDescripcion());
         }
     }
+
     @FunctionalInterface
     interface MyFunctionCargarTabla {
-
         void cargarTabla();
     }
 
@@ -105,6 +108,11 @@ public class NewModelView extends javax.swing.JFrame {
                 "Codigo", "Descripcion", "Accion"
             }
         ));
+        colorsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                colorsTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(colorsTable);
 
         colorsList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -149,15 +157,15 @@ public class NewModelView extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(colorsList, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel3)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addGap(139, 139, 139)
-                                        .addComponent(jLabel1)))
+                                        .addComponent(jLabel1))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(colorsList, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(36, 36, 36))
         );
@@ -215,26 +223,63 @@ public class NewModelView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ColorModel newColorModel = new ColorModel();
-        newColorModel.setCodigo(SKU.getText());
-        newColorModel.setDescripcion(denominacion.getText());
+        ModelsModel newModel = new ModelsModel(SKU.getText(), denominacion.getText());
+        List<ColorModel> colors = new ArrayList<>();
 
-        DataManager dataManager = DataManager.getInstance();
-        dataManager.addColor(newColorModel);
+        DefaultTableModel colorsListModel = (DefaultTableModel) colorsTable.getModel();
+
+        // Recorre cada fila de la tabla
+        for (int i = 0; i < colorsListModel.getRowCount(); i++) {
+            String colorName = (String) colorsListModel.getValueAt(i, 0); // obtiene el valor de la columna 0 de la fila i
+            String colorCode = (String) colorsListModel.getValueAt(i, 1); // obtiene el valor de la columna 1 de la fila i
+            ColorModel color = new ColorModel(colorName, colorCode); // crea un nuevo objeto ColorModel con los valores obtenidos
+            colors.add(color); // agrega el objeto ColorModel a la lista de colores
+        }
+        newModel.setColors(colors); // agrega la lista de colores al nuevo objeto ModelsModel
+        dataManager.addModel(newModel);
+        cargarTabla.cargarTabla();
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        int index = colorsList.getSelectedIndex();
+        List<ColorModel> colors = dataManager.getColors();
+        addItemTabla(colors.get(index));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void colorsListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorsListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_colorsListActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void colorsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_colorsTableMouseClicked
+        int row = colorsTable.getSelectedRow(); // obtiene la fila seleccionada
+        int col = colorsTable.getSelectedColumn(); // obtiene la columna seleccionada
+        if (col == 2) {
+            DefaultTableModel model = (DefaultTableModel) colorsTable.getModel(); // obtiene el modelo de la tabla
+            model.removeRow(row); // elimina la fila seleccionada del modelo
+        }
+    }//GEN-LAST:event_colorsTableMouseClicked
+
+    public void cargarTabla() {
+        // Obtener el modelo de la tabla y convertirlo a DefaultTableModel
+        DefaultTableModel model = (DefaultTableModel) colorsTable.getModel();
+
+        // Limpiar cualquier fila existente en la tabla
+        model.setRowCount(0);
+        DataManager dataManager = DataManager.getInstance();
+
+        // Recorrer la lista y agregar una fila para cada elemento
+        for (ColorModel color : dataManager.getColors()) {
+            Object[] row = {color.getCodigo(), color.getDescripcion()};
+            model.addRow(row);
+        }
+    }
+
+    public void addItemTabla(ColorModel c) {
+        DefaultTableModel model = (DefaultTableModel) colorsTable.getModel();
+        Object[] row = {c.getCodigo(), c.getDescripcion(), "Eliminar"};
+        model.addRow(row);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SKU;

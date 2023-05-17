@@ -6,7 +6,11 @@
 package views;
 
 import controllers.DataManager;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import models.ColorModel;
 import models.ModelsModel;
 
 /**
@@ -182,7 +186,13 @@ public class ManageModelsView extends javax.swing.JFrame {
 
         // Recorrer la lista y agregar una fila para cada elemento
         for (ModelsModel model : dataManager.getModels()) {
-            Object[] row = {model.getSKU(), model.getDenominacion()};
+            Iterator<ColorModel> iter = model.getColors().iterator();
+            String colorsList = "";
+            while (iter.hasNext()) {
+                ColorModel myColor = iter.next();
+                colorsList += myColor.getDescripcion() + ", ";
+            }
+            Object[] row = {model.getSKU(), model.getDenominacion(), colorsList};
             tableModel.addRow(row);
         }
     }

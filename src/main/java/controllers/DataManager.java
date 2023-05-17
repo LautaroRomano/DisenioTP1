@@ -26,11 +26,18 @@ public class DataManager {
 
     private DataManager() {
         colors = new ArrayList<>();
+        InitColors();
         models = new ArrayList<>();
         users = Arrays.asList(new UserModel("1234", "usuario0", "usuario0", "admin", "admin", "admin"),
                 new UserModel("5678", "usuario1", "apellido1", "usuario1@gmail.com", "normal", "1234"),
                 new UserModel("9101", "usuario2", "apellido2", "usuario2@gmail.com", "normal", "abcd")
         );
+    }
+
+    private void InitColors() {
+        colors.add(new ColorModel("#FFFFFF", "Blanco"));
+        colors.add(new ColorModel("#262626", "Negro"));
+        colors.add(new ColorModel("#1515FF", "Azul"));
     }
 
     public static DataManager getInstance() {
@@ -69,13 +76,19 @@ public class DataManager {
     public List<UserModel> getUsers() {
         return users;
     }
-    
+
     public void addModel(ModelsModel model) {
         models.add(model);
     }
 
     public void removeModel(ModelsModel model) {
-        models.remove(model);
+        Iterator<ModelsModel> iter = models.iterator();
+        while (iter.hasNext()) {
+            ModelsModel myModel = iter.next();
+            if (myModel.getDenominacion().equals(model.getDenominacion()) && myModel.getSKU().equals(model.getSKU())) {
+                iter.remove();
+            }
+        }
     }
 
     public List<ModelsModel> getModels() {
