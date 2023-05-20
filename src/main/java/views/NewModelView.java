@@ -6,6 +6,8 @@
 package views;
 
 import controllers.DataManager;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +26,7 @@ public class NewModelView extends javax.swing.JFrame {
 
     public NewModelView(MyFunctionCargarTabla cargarTabla) {
         initComponents();
+        centerWindow();
         this.cargarTabla = cargarTabla;
         colorsList.removeAllItems();
         List<ColorModel> colors = dataManager.getColors();
@@ -38,7 +41,17 @@ public class NewModelView extends javax.swing.JFrame {
     interface MyFunctionCargarTabla {
         void cargarTabla();
     }
+private void centerWindow() {
+        // Obtener el tamaño de la pantalla
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
 
+        // Calcular las coordenadas para centrar la ventana
+        int posX = (pantalla.width - this.getWidth()) / 2;
+        int posY = (pantalla.height - this.getHeight()) / 2;
+
+        // Establecer la ubicación de la ventana en el centro de la pantalla
+        this.setLocation(posX, posY);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

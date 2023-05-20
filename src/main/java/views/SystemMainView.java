@@ -5,11 +5,15 @@
  */
 package views;
 
+import controllers.DataManager;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import models.ColorModel;
+import models.UserModel;
 
 /**
  *
@@ -19,6 +23,24 @@ public class SystemMainView extends javax.swing.JFrame {
 
     public SystemMainView() {
         initComponents();
+        centerWindow();
+        DataManager datamanager = DataManager.getInstance();
+        UserModel userLogin = datamanager.getUserLogin();
+        if (userLogin.getTipoUsuario() == "SUPERVISOR_DE_LINEA") {
+            creatOPBtn.setEnabled(true);
+        }
+    }
+
+    private void centerWindow() {
+        // Obtener el tamaño de la pantalla
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Calcular las coordenadas para centrar la ventana
+        int posX = (pantalla.width - this.getWidth()) / 2;
+        int posY = (pantalla.height - this.getHeight()) / 2;
+
+        // Establecer la ubicación de la ventana en el centro de la pantalla
+        this.setLocation(posX, posY);
     }
 
     @SuppressWarnings("unchecked")
@@ -27,10 +49,10 @@ public class SystemMainView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        gestionarColoresBtn = new javax.swing.JButton();
+        creatOPBtn = new javax.swing.JButton();
+        gestionarModelosBtn = new javax.swing.JButton();
+        consultarLineaBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -45,39 +67,46 @@ public class SystemMainView extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido al sistema");
         jLabel1.setToolTipText("");
 
-        jButton1.setBackground(new java.awt.Color(27, 161, 225));
-        jButton1.setForeground(new java.awt.Color(245, 245, 245));
-        jButton1.setText("GESTIONAR COLORES");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        gestionarColoresBtn.setBackground(new java.awt.Color(153, 204, 255));
+        gestionarColoresBtn.setForeground(new java.awt.Color(38, 38, 38));
+        gestionarColoresBtn.setText("GESTIONAR COLORES");
+        gestionarColoresBtn.setMaximumSize(new java.awt.Dimension(109, 29));
+        gestionarColoresBtn.setMinimumSize(new java.awt.Dimension(109, 29));
+        gestionarColoresBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                gestionarColoresBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(27, 161, 225));
-        jButton3.setForeground(new java.awt.Color(245, 245, 245));
-        jButton3.setText("CREAR OP");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        creatOPBtn.setBackground(new java.awt.Color(153, 204, 255));
+        creatOPBtn.setForeground(new java.awt.Color(38, 38, 38));
+        creatOPBtn.setText("CREAR OP");
+        creatOPBtn.setEnabled(false);
+        creatOPBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                creatOPBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(27, 161, 225));
-        jButton2.setForeground(new java.awt.Color(245, 245, 245));
-        jButton2.setText("GESTIONAR MODELOS");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        gestionarModelosBtn.setBackground(new java.awt.Color(153, 204, 255));
+        gestionarModelosBtn.setForeground(new java.awt.Color(38, 38, 38));
+        gestionarModelosBtn.setText("GESTIONAR MODELOS");
+        gestionarModelosBtn.setMaximumSize(new java.awt.Dimension(109, 29));
+        gestionarModelosBtn.setMinimumSize(new java.awt.Dimension(109, 29));
+        gestionarModelosBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                gestionarModelosBtnActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(27, 161, 225));
-        jButton4.setForeground(new java.awt.Color(245, 245, 245));
-        jButton4.setText("CONSULTAR LINEAS");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        consultarLineaBtn.setBackground(new java.awt.Color(153, 204, 255));
+        consultarLineaBtn.setForeground(new java.awt.Color(38, 38, 38));
+        consultarLineaBtn.setText("CONSULTAR LINEAS");
+        consultarLineaBtn.setMaximumSize(new java.awt.Dimension(109, 29));
+        consultarLineaBtn.setMinimumSize(new java.awt.Dimension(109, 29));
+        consultarLineaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                consultarLineaBtnActionPerformed(evt);
             }
         });
 
@@ -86,13 +115,13 @@ public class SystemMainView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
+                .addContainerGap(101, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gestionarColoresBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creatOPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gestionarModelosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(consultarLineaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(111, 111, 111))
         );
         jPanel1Layout.setVerticalGroup(
@@ -101,13 +130,13 @@ public class SystemMainView extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(creatOPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(consultarLineaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(gestionarModelosBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(gestionarColoresBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -127,23 +156,25 @@ public class SystemMainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void gestionarColoresBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarColoresBtnActionPerformed
         ManageColorsView manageColorView = new ManageColorsView();
         manageColorView.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_gestionarColoresBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void creatOPBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatOPBtnActionPerformed
+        CreateOPView createOPView = new CreateOPView();
+        createOPView.setVisible(true);
+    }//GEN-LAST:event_creatOPBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void gestionarModelosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionarModelosBtnActionPerformed
         ManageModelsView manageModelsView = new ManageModelsView();
         manageModelsView.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_gestionarModelosBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void consultarLineaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarLineaBtnActionPerformed
+        ConsultLinesView consultLines = new ConsultLinesView();
+        consultLines.setVisible(true);
+    }//GEN-LAST:event_consultarLineaBtnActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_3) {
@@ -158,10 +189,10 @@ public class SystemMainView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton consultarLineaBtn;
+    private javax.swing.JButton creatOPBtn;
+    private javax.swing.JButton gestionarColoresBtn;
+    private javax.swing.JButton gestionarModelosBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

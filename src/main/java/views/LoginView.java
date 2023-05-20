@@ -7,6 +7,8 @@ package views;
 
 import controllers.LoginController;
 import controllers.SystemMainController;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import models.UserModel;
 
@@ -23,6 +25,19 @@ public class LoginView extends javax.swing.JFrame {
      */
     public LoginView() {
         initComponents();
+        centerWindow();
+    }
+    
+    private void centerWindow() {
+        // Obtener el tamaño de la pantalla
+        Dimension pantalla = Toolkit.getDefaultToolkit().getScreenSize();
+
+        // Calcular las coordenadas para centrar la ventana
+        int posX = (pantalla.width - this.getWidth()) / 2;
+        int posY = (pantalla.height - this.getHeight()) / 2;
+
+        // Establecer la ubicación de la ventana en el centro de la pantalla
+        this.setLocation(posX, posY);
     }
 
     /**
