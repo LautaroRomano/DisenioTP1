@@ -23,6 +23,7 @@ public class ManageColorsView extends javax.swing.JFrame {
     public ManageColorsView() {
         initComponents();
         centerWindow();
+        cargarTabla();
     }
 
     private void centerWindow() {

@@ -27,6 +27,7 @@ public class ManageModelsView extends javax.swing.JFrame {
     public ManageModelsView() {
         initComponents();
         centerWindow();
+        cargarTabla();
     }
 
     private void centerWindow() {

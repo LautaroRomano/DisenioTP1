@@ -245,10 +245,13 @@ public class CreateOPView extends javax.swing.JFrame {
             return;
         }
 
-        Iterator<ColorModel> iter = modelSelected.getColors().iterator();
-        while (iter.hasNext()) {
-            ColorModel myModel = iter.next();
-            colorsList.addItem(myModel.getDescripcion() + " - " + myModel.getCodigo());
+        if (modelSelected.getColors() != null) {
+            Iterator<ColorModel> iter = modelSelected.getColors().iterator();
+            colorsList.removeAllItems();
+            while (iter.hasNext()) {
+                ColorModel myModel = iter.next();
+                colorsList.addItem(myModel.getDescripcion() + " - " + myModel.getCodigo());
+            }
         }
     }//GEN-LAST:event_modelsListItemStateChanged
 
