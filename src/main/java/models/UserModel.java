@@ -16,6 +16,9 @@ public class UserModel {
         this.tipoUsuario = tipoUsuario;
         this.contrasenia = contrasenia;
     }
+
+    public UserModel() {
+    }
     
     // Métodos getter y setter para cada atributo
     public String getDni() {

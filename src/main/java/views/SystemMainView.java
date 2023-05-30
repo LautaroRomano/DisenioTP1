@@ -27,7 +27,15 @@ public class SystemMainView extends javax.swing.JFrame {
         DataManager datamanager = DataManager.getInstance();
         UserModel userLogin = datamanager.getUserLogin();
         if (userLogin.getTipoUsuario() == "SUPERVISOR_DE_LINEA") {
+            consultarLineaBtn.setEnabled(true);
             creatOPBtn.setEnabled(true);
+        }
+        if (userLogin.getTipoUsuario() == "ADMINISTRADOR") {
+            gestionarModelosBtn.setEnabled(true);
+            gestionarColoresBtn.setEnabled(true);
+        }
+        if (userLogin.getTipoUsuario() == "SUPERVISOR_DE_CALIDAD") {
+            consultarLineaBtn.setEnabled(true);
         }
     }
 
@@ -71,6 +79,7 @@ public class SystemMainView extends javax.swing.JFrame {
         gestionarColoresBtn.setBackground(new java.awt.Color(153, 204, 255));
         gestionarColoresBtn.setForeground(new java.awt.Color(38, 38, 38));
         gestionarColoresBtn.setText("GESTIONAR COLORES");
+        gestionarColoresBtn.setEnabled(false);
         gestionarColoresBtn.setMaximumSize(new java.awt.Dimension(109, 29));
         gestionarColoresBtn.setMinimumSize(new java.awt.Dimension(109, 29));
         gestionarColoresBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +101,7 @@ public class SystemMainView extends javax.swing.JFrame {
         gestionarModelosBtn.setBackground(new java.awt.Color(153, 204, 255));
         gestionarModelosBtn.setForeground(new java.awt.Color(38, 38, 38));
         gestionarModelosBtn.setText("GESTIONAR MODELOS");
+        gestionarModelosBtn.setEnabled(false);
         gestionarModelosBtn.setMaximumSize(new java.awt.Dimension(109, 29));
         gestionarModelosBtn.setMinimumSize(new java.awt.Dimension(109, 29));
         gestionarModelosBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +113,7 @@ public class SystemMainView extends javax.swing.JFrame {
         consultarLineaBtn.setBackground(new java.awt.Color(153, 204, 255));
         consultarLineaBtn.setForeground(new java.awt.Color(38, 38, 38));
         consultarLineaBtn.setText("CONSULTAR LINEAS");
+        consultarLineaBtn.setEnabled(false);
         consultarLineaBtn.setMaximumSize(new java.awt.Dimension(109, 29));
         consultarLineaBtn.setMinimumSize(new java.awt.Dimension(109, 29));
         consultarLineaBtn.addActionListener(new java.awt.event.ActionListener() {

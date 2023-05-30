@@ -63,6 +63,8 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="reanudarBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="FinalizarBtn1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="FinalizarBtn" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jButton1" min="-2" pref="90" max="-2" attributes="0"/>
@@ -88,6 +90,7 @@
                       <Component id="pausarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="reanudarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="FinalizarBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="FinalizarBtn1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -201,11 +204,20 @@
         </Component>
         <Component class="javax.swing.JButton" name="FinalizarBtn">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Finalizar"/>
+            <Property name="text" type="java.lang.String" value="Inspeccionar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FinalizarBtnActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="FinalizarBtn1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Finalizar"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FinalizarBtn1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -57,6 +57,7 @@ public class ConsultLinesView extends javax.swing.JFrame {
         pausarBtn = new javax.swing.JButton();
         reanudarBtn = new javax.swing.JButton();
         FinalizarBtn = new javax.swing.JButton();
+        FinalizarBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,11 +115,19 @@ public class ConsultLinesView extends javax.swing.JFrame {
             }
         });
 
-        FinalizarBtn.setText("Finalizar");
+        FinalizarBtn.setText("Inspeccionar");
         FinalizarBtn.setEnabled(false);
         FinalizarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FinalizarBtnActionPerformed(evt);
+            }
+        });
+
+        FinalizarBtn1.setText("Finalizar");
+        FinalizarBtn1.setEnabled(false);
+        FinalizarBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalizarBtn1ActionPerformed(evt);
             }
         });
 
@@ -139,6 +148,8 @@ public class ConsultLinesView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(reanudarBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FinalizarBtn1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(FinalizarBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -157,7 +168,8 @@ public class ConsultLinesView extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(pausarBtn)
                     .addComponent(reanudarBtn)
-                    .addComponent(FinalizarBtn))
+                    .addComponent(FinalizarBtn)
+                    .addComponent(FinalizarBtn1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -212,14 +224,12 @@ public class ConsultLinesView extends javax.swing.JFrame {
     }//GEN-LAST:event_reanudarBtnActionPerformed
 
     private void FinalizarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarBtnActionPerformed
-        DefaultTableModel model = (DefaultTableModel) linesTable.getModel();
-        int selectedRow = linesTable.getSelectedRow();
-        if (selectedRow != -1) {
-            int nroLine = Integer.parseInt(model.getValueAt(selectedRow, 0).toString());
-            datamanager.changeStateLine(nroLine, "Finalizada");
-        }
-        cargarTabla();
+       
     }//GEN-LAST:event_FinalizarBtnActionPerformed
+
+    private void FinalizarBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FinalizarBtn1ActionPerformed
 
     private void consultLineState() {
         String tipoUsuario = datamanager.getUserLogin().getTipoUsuario();
@@ -292,6 +302,7 @@ public class ConsultLinesView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FinalizarBtn;
+    private javax.swing.JButton FinalizarBtn1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

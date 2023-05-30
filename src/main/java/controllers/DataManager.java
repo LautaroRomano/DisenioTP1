@@ -63,7 +63,7 @@ public class DataManager {
         users.add(new UserModel("000001", "Simson", "Homero", "sc1@email.com", "SUPERVISOR_DE_CALIDAD", "admin"));
         users.add(new UserModel("000002", "Simson", "Lisa", "sl1@email.com", "SUPERVISOR_DE_LINEA", "admin"));
         users.add(new UserModel("000003", "Simson", "Bart", "sl2@email.com", "SUPERVISOR_DE_LINEA", "admin"));
-
+        users.add(new UserModel("000004", "Simson", "Marge", "admin@email.com", "ADMINISTRADOR", "admin"));
     }
 
     private void InitLines() {
